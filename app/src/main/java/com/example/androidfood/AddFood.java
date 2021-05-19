@@ -92,7 +92,6 @@ public class AddFood extends AppCompatActivity {
                 Intent admin = new Intent(AddFood.this, com.example.androidfood.admin.class);
                 startActivity(admin);
                 finish();
-                int a;
 
             }
         });

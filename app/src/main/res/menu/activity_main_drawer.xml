@@ -17,13 +17,13 @@
             android:iconTint="@color/white"/>
 
         <item
-            android:id="@+id/nav_orders"
+            android:id="@+id/nav_order"
             android:icon="@drawable/ic_baseline_reorder_24"
             android:title="Orders"
             android:iconTint="@color/white"/>
 
         <item
-            android:id="@+id/nav_signout"
+            android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_baseline_exit_to_app_24"
             android:iconTint="@color/white"
             android:title="Sign Out"/>

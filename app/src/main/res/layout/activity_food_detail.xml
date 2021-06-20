@@ -18,6 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_star_24"
+                android:backgroundTint="@color/white"
+                android:layout_marginTop="300dp"
+                android:id="@+id/btn_rating"/>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +79,8 @@
                     app:textSize="8sp" />
 
 
+
+
             </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -96,13 +108,45 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="5dp">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+                    android:rating="0"
+                    android:max="5"
+                    android:isIndicator="true"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <Button
+            android:id="@+id/btnShowComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Product Reviews"></Button>
+
         <Button
             android:id="@+id/btn_them"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginHorizontal="120dp"
-            android:text="Thêm giỏ hàng"></Button>
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="140dp"
+            android:text="Add My Cart"></Button>
+
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

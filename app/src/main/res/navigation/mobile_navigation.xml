@@ -2,24 +2,28 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.androidfood.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_cart"
         android:name="com.example.androidfood.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Cart"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_order"
         android:name="com.example.androidfood.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="Order"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/nav_log_out"
+        android:name="com.example.androidfood.ui.slideshow.SlideshowFragment"
+        android:label="Log Out"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

@@ -3,8 +3,8 @@ package Model;
 public class User {
     private String Name;
     private String Password;
+    private String Phone;
     private int Status;
-
 
     public User(String name, String password, int status) {
         Name = name;
@@ -13,6 +13,14 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
     public int getStatus() {

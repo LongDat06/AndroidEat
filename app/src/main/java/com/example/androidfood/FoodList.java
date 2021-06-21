@@ -33,6 +33,7 @@ import java.util.List;
 import Database.Database;
 import Interface.ItemClickListener;
 import Model.Category;
+import Model.Commen;
 import Model.Food;
 import ViewHolder.FoodViewHolder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -171,21 +172,21 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.food_name.setText(food.getName());
                 Picasso.with(getBaseContext()).load(   food.getImg()).resize(410,200).into(foodViewHolder.food_img);
 
-                if(localDB.isFavorites(adapter.getRef(i).getKey()))
+                if(localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone()))
                     foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
 
                 foodViewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!localDB.isFavorites(adapter.getRef(i).getKey())){
-                            localDB.addToFavorites(adapter.getRef(i).getKey());
+                        if(!localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
+                            localDB.addToFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(FoodList.this,""+food.getName()+"was added to Favorites Food",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodList.this,""+food.getName()+" was added to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            localDB.removeFromFavorites(adapter.getRef(i).getKey());
+                            localDB.removeFromFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(FoodList.this,""+food.getName()+"was remmove to Favorites Food",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodList.this,""+food.getName()+" was remmove to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -238,21 +239,21 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.food_name.setText(food.getName());
                 Picasso.with(getBaseContext()).load(   food.getImg()).resize(410,200).into(foodViewHolder.food_img);
 
-                if(localDB.isFavorites(adapter.getRef(i).getKey()))
+                if(localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone()))
                     foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
 
                 foodViewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!localDB.isFavorites(adapter.getRef(i).getKey())){
-                            localDB.addToFavorites(adapter.getRef(i).getKey());
+                        if(!localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
+                            localDB.addToFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(FoodList.this,""+food.getName()+"was added to Favorites Food",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodList.this,""+food.getName()+" was added to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            localDB.removeFromFavorites(adapter.getRef(i).getKey());
+                            localDB.removeFromFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
-                            Toast.makeText(FoodList.this,""+food.getName()+"was remmove to Favorites Food",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodList.this,""+food.getName()+" was remmove to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

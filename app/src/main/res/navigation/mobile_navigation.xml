@@ -22,6 +22,12 @@
         android:label="Order"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
+        android:id="@+id/nav_favorites"
+        android:name="com.example.androidfood.ui.slideshow.SlideshowFragment"
+        android:label="Favorites Food"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
         android:id="@+id/nav_log_out"
         android:name="com.example.androidfood.ui.slideshow.SlideshowFragment"
         android:label="Log Out"

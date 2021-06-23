@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     >
 
@@ -14,9 +14,13 @@
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         >
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/img_Cart"/>
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="match_parent">
 
             <TextView
@@ -37,20 +41,23 @@
                 android:layout_gravity="center_vertical|start"
                 android:textAllCaps="true"
                 android:textStyle="italic"
-                android:text="100000 "/>
+                android:text="$100000 "/>
 
 
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/cart_item_count"
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginRight="16dp"
-
-            />
+        <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+            android:id="@+id/btn_quatity"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="18dp"
+            app:backGroundColor="@color/purple_200"
+            app:finalNumber="20"
+            app:initialNumber="1"
+            app:textSize="8sp" />
 
 
     </LinearLayout>

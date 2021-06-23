@@ -58,7 +58,7 @@ public class Cart extends AppCompatActivity {
 //    };
     RecyclerView recyclerView;
     RecyclerView.LayoutManager manager;
-    TextView txtTotalPrice;
+    public TextView txtTotalPrice;
     Button btnPlace;
     List<Order> cart = new ArrayList<>();
     CartAdapter adapter;

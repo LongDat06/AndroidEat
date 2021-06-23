@@ -78,7 +78,7 @@ public class Home extends AppCompatActivity  {
         // menu should be considered as top level destinations.
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_cart, R.id.nav_order, R.id.nav_log_out)
+                R.id.nav_home, R.id.nav_cart, R.id.nav_order, R.id.nav_log_out,R.id.nav_favorites)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -98,6 +98,10 @@ public class Home extends AppCompatActivity  {
                 } else if(id == R.id.nav_order) {
                     Intent orderIntent = new Intent(Home.this,OrderStatus.class);
                     startActivity(orderIntent);
+                }
+                else if(id == R.id.nav_favorites) {
+                    Intent favoritesIntent = new Intent(Home.this, FavoritesActivity.class);
+                    startActivity(favoritesIntent);
                 }else if(id == R.id.nav_log_out) {
                     Intent signIn = new Intent(Home.this,SignIn.class);
                     signIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

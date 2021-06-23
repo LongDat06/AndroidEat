@@ -4,13 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
-import android.database.sqlite.SQLiteException;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.Commen;
+import Model.Favorites;
 import Model.Order;
 
 public class Database extends SQLiteAssetHelper {
@@ -27,17 +28,19 @@ public class Database extends SQLiteAssetHelper {
     public List<Order> getCarts(){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String[] sqlSeclect = {"ProductName","ProductId","Quantity","Price"};
+        String[] sqlSeclect = {"ID","ProductName","ProductId","Quantity","Price","Img"};
         String sqlTable ="OrderDetail";
         qb.setTables(sqlTable);
         Cursor c = qb.query(db,sqlSeclect,null,null,null,null,null);
         final List<Order> result = new ArrayList<>();
         if(c.moveToFirst()){
             do{
-                result.add(new Order(c.getString(c.getColumnIndex("ProductId")),
+                result.add(new Order(c.getInt(c.getColumnIndex("ID")),
+                                c.getString(c.getColumnIndex("ProductId")),
                                 c.getString(c.getColumnIndex("ProductName")),
                                 c.getString(c.getColumnIndex("Quantity")),
-                                c.getString(c.getColumnIndex("Price")))
+                                c.getString(c.getColumnIndex("Price")),
+                                c.getString(c.getColumnIndex("Img")))
 
                 );
             }while (c.moveToNext());
@@ -47,11 +50,12 @@ public class Database extends SQLiteAssetHelper {
 
     public void addtoCarts(Order order){
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("INSERT INTO OrderDetail(ProductId,ProductName,Quantity,Price) VALUES ('%s','%s','%s','%s');",
+        String query = String.format("INSERT INTO OrderDetail(ProductId,ProductName,Quantity,Price,Img) VALUES ('%s','%s','%s','%s','%s');",
                 order.getProductId(),
                 order.getProductName(),
                 order.getQuantity(),
-                order.getPrice());
+                order.getPrice(),
+                order.getImg());
        db.execSQL(query);
     }
 
@@ -61,9 +65,21 @@ public class Database extends SQLiteAssetHelper {
         db.execSQL(query);
     }
 
-    public void addToFavorites(String foodId,String phone){
+    public void updateCart(Order order){
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("INSERT INTO Favorites(FoodId,Phone) VALUES ('%s','%s');",foodId,phone);
+        String query = String.format("UPDATE OrderDetail SET Quantity = '%s' WHERE ID = '%d' ",order.getQuantity(),order.getID());
+        db.execSQL(query);
+    }
+
+    public void addToFavorites(Favorites food){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("INSERT INTO Favorites(" + "FoodId,Phone,FoodName,FoodMenuID,FoodImg,FoodPrice)" + "VALUES ('%s','%s','%s','%s','%s','%s');",
+                food.getFoodId(),
+                food.getUserPhone(),
+                food.getFoodName(),
+                food.getFoodMenu(),
+                food.getFoodImg(),
+                food.getFoodPrice());
         db.execSQL(query);
     }
 
@@ -84,4 +100,30 @@ public class Database extends SQLiteAssetHelper {
         cursor.close();
         return true;
     }
+
+    public List<Favorites> getFavorites(String phone){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String[] sqlSeclect = {"Phone","FoodId","FoodName","FoodPrice","FoodMenuId","FoodImg"};
+        String sqlTable ="Favorites";
+        qb.setTables(sqlTable);
+        Cursor c = qb.query(db,sqlSeclect,"Phone=?",new String[]{phone},null,null,null,null);
+        final List<Favorites> result = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                result.add(new Favorites(c.getString(c.getColumnIndex("FoodId")),
+                        c.getString(c.getColumnIndex("FoodName")),
+                        c.getString(c.getColumnIndex("FoodPrice")),
+                        c.getString(c.getColumnIndex("FoodMenuId")),
+                        c.getString(c.getColumnIndex("FoodImg")),
+                        c.getString(c.getColumnIndex("Phone"))
+
+
+                ));
+            }while (c.moveToNext());
+        }
+        return result;
+    }
+
+
 }

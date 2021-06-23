@@ -101,11 +101,14 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                         foodId,
                         currentFood.getName(),
                         elegantNumberButton.getNumber(),
-                        currentFood.getPrice()
+                        currentFood.getPrice(),
+                        currentFood.getImg()
                 ));
                 Toast.makeText(FoodDetail.this , "Add to Cart", Toast.LENGTH_SHORT).show();
             }
         });
+
+
         database = FirebaseDatabase.getInstance();
         detail_food = database.getReference("Food");
         ratingtbl = database.getReference("Rating");

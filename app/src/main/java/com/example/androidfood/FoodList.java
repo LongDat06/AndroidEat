@@ -32,8 +32,8 @@ import java.util.List;
 
 import Database.Database;
 import Interface.ItemClickListener;
-import Model.Category;
 import Model.Commen;
+import Model.Favorites;
 import Model.Food;
 import ViewHolder.FoodViewHolder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -178,8 +178,17 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        Favorites favorites = new Favorites();
+                        favorites.setFoodId(adapter.getRef(i).getKey());
+                        favorites.setFoodImg(food.getImg());
+                        favorites.setFoodMenu(food.getMenuId());
+                        favorites.setFoodPrice(food.getPrice());
+                        favorites.setFoodName(food.getName());
+                        favorites.setUserPhone(Commen.currentUser.getPhone());
+
                         if(!localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
-                            localDB.addToFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
+                            localDB.addToFavorites(favorites);
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
                             Toast.makeText(FoodList.this,""+food.getName()+" was added to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
@@ -241,12 +250,20 @@ public class FoodList extends AppCompatActivity {
 
                 if(localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone()))
                     foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
-
                 foodViewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        Favorites favorites = new Favorites();
+                        favorites.setFoodId(adapter.getRef(i).getKey());
+                        favorites.setFoodImg(food.getImg());
+                        favorites.setFoodMenu(food.getMenuId());
+                        favorites.setFoodPrice(food.getPrice());
+                        favorites.setFoodName(food.getName());
+                        favorites.setUserPhone(Commen.currentUser.getPhone());
+
                         if(!localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
-                            localDB.addToFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
+                            localDB.addToFavorites(favorites);
                             foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
                             Toast.makeText(FoodList.this,""+food.getName()+" was added to Favorites Food",Toast.LENGTH_SHORT).show();
                         }

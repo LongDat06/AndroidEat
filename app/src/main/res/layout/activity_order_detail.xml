@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    >
+    android:layout_height="match_parent"
+    tools:context=".OrderDetail">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:id="@+id/order_info"
+        >
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,12 +42,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/order_status"
+                    android:id="@+id/order_total"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="italic"
-                    android:text="Status"/>
+                    android:text="Total"/>
 
 
                 <TextView
@@ -70,34 +76,29 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below = "@id/order_info"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="30sp"
+            android:text="Detail"/>
+
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="2">
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_detail"
-                android:text="Detail"
-                android:layout_marginRight="30dp"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_remove"
-                android:text="Remove"/>
-
-        </LinearLayout>
-
-
-
-
+            android:id="@+id/lstFood"/>
 
     </LinearLayout>
 
-
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

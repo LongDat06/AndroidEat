@@ -125,5 +125,4 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
-
 }

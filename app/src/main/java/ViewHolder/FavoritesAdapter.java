@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +35,7 @@ import Model.Order;
 class FavoritesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView food_name;
-    public ImageView food_img,fav;
+    public ImageView food_img;
     private ItemClickListener itemClickListener;
 
 
@@ -55,7 +56,7 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder implements View.OnClic
 
         food_name = (TextView)itemView.findViewById(R.id.food_namefav);
         food_img = (ImageView)itemView.findViewById(R.id.food_imgfav);
-        fav = itemView.findViewById(R.id.fav);
+
         itemView.setOnClickListener(this);
     }
 
@@ -94,7 +95,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-//                                     Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
+
                 Intent fooddetail = new Intent(favoritesActivity, FoodDetail.class);
                 fooddetail.putExtra("foodId",favoritesList.get(position).getFoodId());
                 favoritesActivity.startActivity(fooddetail);
@@ -102,13 +103,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder>{
             }
         });
 
-//        holder.fav.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                database.removeFromFavorites(favoritesList.get(position).getFoodId(),favoritesList.get(position).getUserPhone());
-//                removeItem(position);
-//            }
-//        });
 
     }
 
@@ -121,4 +115,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder>{
     public int getItemCount() {
         return favoritesList.size();
     }
+
+
+
 }

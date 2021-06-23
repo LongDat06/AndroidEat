@@ -10,6 +10,6 @@ public class Commen {
         else
             return "Shipped";
     }
-
+    public static Request currentRequest;
     public static final String INTENT_FOOD_ID ="FoodId";
 }

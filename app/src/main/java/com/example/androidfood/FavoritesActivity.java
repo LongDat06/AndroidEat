@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +27,10 @@ public class FavoritesActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FavoritesAdapter adapter;
-    RelativeLayout relativeLayout;
 
+    RelativeLayout relativeLayout;
     List<Favorites> favoritesList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +43,11 @@ public class FavoritesActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+
         loadFavoritesfood();
 
     }
+
 
 
 

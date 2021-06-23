@@ -9,6 +9,13 @@ public class Order {
     private String Img;
 
 
+    public Order(String productId, String productName, String quantity, String price) {
+        ProductId = productId;
+        ProductName = productName;
+        Quantity = quantity;
+        Price = price;
+    }
+
     public Order(String productId, String productName, String quantity, String price, String img) {
         ProductId = productId;
         ProductName = productName;

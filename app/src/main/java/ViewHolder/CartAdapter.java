@@ -73,8 +73,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-//        TextDrawable drawable = TextDrawable.builder().buildRound(""+listData.get(position).getQuantity(), Color.RED);
-//        holder.img_cart_count.setImageDrawable(drawable);
+
+
+
         holder.btn_quatity.setNumber(listData.get(position).getQuantity());
         holder.btn_quatity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
@@ -100,6 +101,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
         holder.txt_cart_price.setText("$"+ listData.get(position).getPrice());
         holder.txt_cart_name.setText(listData.get(position).getProductName());
         Picasso.with(cart.getBaseContext()).load(listData.get(position).getImg()).resize(70,70).centerCrop().into(holder.img_cart);
+
 
     }
 

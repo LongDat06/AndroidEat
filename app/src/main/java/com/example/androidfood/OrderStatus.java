@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,26 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.txtOrderStatus.setText(Commen.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
                 orderViewHolder.txtOrderPhone.setText(request.getPhone());
+
+
+                orderViewHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deleteOrder(adapter.getRef(i).getKey());
+                    }
+                });
+
+
+                orderViewHolder.btnDetail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent orderDetail = new Intent(OrderStatus.this,OrderDetail.class);
+                        Commen.currentRequest = request;
+                        orderDetail.putExtra("OrderId",adapter.getRef(i).getKey());
+                        startActivity(orderDetail);
+
+                    }
+                });
             }
 
             @NonNull
@@ -71,6 +92,11 @@ public class OrderStatus extends AppCompatActivity {
         };
         adapter.startListening();
         recyclerView.setAdapter(adapter);
+    }
+
+    private void deleteOrder(String key) {
+        requests.child(key).removeValue();
+        adapter.notifyDataSetChanged();
     }
 }
 

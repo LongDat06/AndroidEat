@@ -6,11 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,12 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.common.internal.service.Common;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -75,6 +67,8 @@ public class Cart extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
+
+
 
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btn_planceorder);

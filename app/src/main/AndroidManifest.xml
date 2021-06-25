@@ -10,8 +10,16 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
-        <activity android:name=".OrderDetail"></activity>
+        android:supportsRtl="true"
+        android:name="androidx.multidex.MultiDexApplication" >
+
+        <activity android:name=".VerifiOTPActivity"></activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_app_id" />
+
+        <activity android:name=".OrderDetail" />
         <activity android:name=".FavoritesActivity" />
         <activity android:name=".ShowComment" />
 
@@ -40,6 +48,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider162452082588840"
+            android:exported="true" />
     </application>
 
 </manifest>

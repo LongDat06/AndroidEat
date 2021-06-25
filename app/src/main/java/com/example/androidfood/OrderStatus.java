@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -65,7 +66,13 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        deleteOrder(adapter.getRef(i).getKey());
+                        if(request.getStatus() == String.valueOf(0)) {
+                            deleteOrder(adapter.getRef(i).getKey());
+                        }
+                        else {
+                            Toast.makeText(OrderStatus.this ,"Order is being delivered. Can't cancel ",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                     }
                 });
 

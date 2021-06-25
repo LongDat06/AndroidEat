@@ -8,7 +8,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +33,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +63,34 @@ public class FoodList extends AppCompatActivity {
 
     Database localDB ;
 
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
+
+    Target target = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            SharePhoto photo = new SharePhoto.Builder()
+                    .setBitmap(bitmap)
+                    .build();
+            if(ShareDialog.canShow(SharePhotoContent.class)){
+                SharePhotoContent content = new SharePhotoContent.Builder()
+                        .addPhoto(photo)
+                        .build();
+                shareDialog.show(content);
+            }
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
+
     SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -66,6 +102,9 @@ public class FoodList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
+
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
 
         database = FirebaseDatabase.getInstance();
         foodlist = database.getReference("Food");
@@ -250,6 +289,16 @@ public class FoodList extends AppCompatActivity {
 
                 if(localDB.isFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone()))
                     foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
+
+                foodViewHolder.share_img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Picasso.with(getApplicationContext())
+                                .load(food.getImg())
+                                .into(target);
+                    }
+                });
+
                 foodViewHolder.fav_img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -269,11 +318,12 @@ public class FoodList extends AppCompatActivity {
                         }
                         else {
                             localDB.removeFromFavorites(adapter.getRef(i).getKey(), Commen.currentUser.getPhone());
-                            foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_24);
+                            foodViewHolder.fav_img.setImageResource(R.drawable.ic_baseline_favorite_border_24);
                             Toast.makeText(FoodList.this,""+food.getName()+" was remmove to Favorites Food",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
 
                 final Food local = food;
                 foodViewHolder.setItemClickListener(new ItemClickListener() {

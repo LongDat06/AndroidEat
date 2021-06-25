@@ -66,7 +66,8 @@ public class OrderStatus extends AppCompatActivity {
                 orderViewHolder.btnRemove.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(request.getStatus() == String.valueOf(0)) {
+                        String a = "0";
+                        if(request.getStatus().equals(a) ) {
                             deleteOrder(adapter.getRef(i).getKey());
                         }
                         else {

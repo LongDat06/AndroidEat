@@ -35,12 +35,16 @@ import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import Database.Database;
 import Interface.ItemClickListener;
 import Model.Commen;
+import Model.DishViewed;
 import Model.Favorites;
 import Model.Food;
 import ViewHolder.FoodViewHolder;
@@ -244,6 +248,21 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 //                        Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
+                        DateFormat df = new SimpleDateFormat("mm");
+                        String date = df.format(Calendar.getInstance().getTime());
+                        DishViewed dishViewed = new DishViewed();
+                        dishViewed.setFoodId(adapter.getRef(i).getKey());
+                        dishViewed.setFoodImg(food.getImg());
+                        dishViewed.setFoodMenu(food.getMenuId());
+                        dishViewed.setFoodPrice(food.getPrice());
+                        dishViewed.setFoodName(food.getName());
+                        dishViewed.setUserPhone(Commen.currentUser.getPhone());
+                        dishViewed.setTime(date);
+
+                        if(!localDB.isDishViewed(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
+                            localDB.addToDishViewed(dishViewed);
+                        }
+
                         Intent fooddetail = new Intent(FoodList.this,FoodDetail.class);
                         fooddetail.putExtra("foodId",adapter.getRef(position).getKey());
                         startActivity(fooddetail);
@@ -330,6 +349,20 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 //                        Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
+                        DateFormat df = new SimpleDateFormat("mm");
+                        String date = df.format(Calendar.getInstance().getTime());
+                        DishViewed dishViewed = new DishViewed();
+                        dishViewed.setFoodId(adapter.getRef(i).getKey());
+                        dishViewed.setFoodImg(food.getImg());
+                        dishViewed.setFoodMenu(food.getMenuId());
+                        dishViewed.setFoodPrice(food.getPrice());
+                        dishViewed.setFoodName(food.getName());
+                        dishViewed.setUserPhone(Commen.currentUser.getPhone());
+                        dishViewed.setTime(date);
+
+                        if(!localDB.isDishViewed(adapter.getRef(i).getKey(), Commen.currentUser.getPhone())){
+                            localDB.addToDishViewed(dishViewed);
+                        }
                         Intent fooddetail = new Intent(FoodList.this,FoodDetail.class);
                         fooddetail.putExtra("foodId",adapter.getRef(position).getKey());
                         startActivity(fooddetail);

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Commen;
+import Model.DishViewed;
 import Model.Favorites;
 import Model.Order;
 
@@ -131,4 +132,59 @@ public class Database extends SQLiteAssetHelper {
         return result;
     }
 
+    public void addToDishViewed(DishViewed food){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("INSERT INTO DishViewed(" + "FoodId,Phone,FoodName,FoodMenuID,FoodImg,FoodPrice,Time)" + "VALUES ('%s','%s','%s','%s','%s','%s','%s');",
+                food.getFoodId(),
+                food.getUserPhone(),
+                food.getFoodName(),
+                food.getFoodMenu(),
+                food.getFoodImg(),
+                food.getFoodPrice(),
+                food.getTime());
+        db.execSQL(query);
+    }
+
+    public boolean isDishViewed(String foodId,String phone){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("SELECT * FROM DishViewed WHERE FoodId='%s' and Phone='%s';",foodId,phone);
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
+    }
+
+    public void removeDishViewed(String foodId,String phone){
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("DELETE FROM DishViewed WHERE FoodId='%s' and Phone='%s' ;",foodId,phone);
+        db.execSQL(query);
+    }
+
+    public List<DishViewed> getDishViewed(String phone){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String[] sqlSeclect = {"Phone","FoodId","FoodName","FoodPrice","FoodMenuId","FoodImg","Time"};
+        String sqlTable ="DishViewed";
+        qb.setTables(sqlTable);
+        Cursor c = qb.query(db,sqlSeclect,"Phone=?",new String[]{phone},null,null,null,null);
+        final List<DishViewed> result = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                result.add(new DishViewed(c.getString(c.getColumnIndex("FoodId")),
+                        c.getString(c.getColumnIndex("FoodName")),
+                        c.getString(c.getColumnIndex("FoodPrice")),
+                        c.getString(c.getColumnIndex("FoodMenuId")),
+                        c.getString(c.getColumnIndex("FoodImg")),
+                        c.getString(c.getColumnIndex("Phone")),
+                        c.getString(c.getColumnIndex("Time"))
+
+
+                ));
+            }while (c.moveToNext());
+        }
+        return result;
+    }
 }

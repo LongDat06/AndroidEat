@@ -27,6 +27,11 @@
             android:icon="@drawable/ic_baseline_favorite_border_24"
             android:title="Favorites Food"
             android:iconTint="@color/white"/>
+        <item
+            android:id="@+id/nav_dishviewed"
+            android:icon="@drawable/ic_baseline_history_24"
+            android:title="Food Viewed"
+            android:iconTint="@color/white"/>
 
         <item
             android:id="@+id/nav_log_out"

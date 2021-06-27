@@ -33,6 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/food_name1"
+                android:background="#c0c0c0"
                 android:text="Name of Food"
                 android:textColor="@color/white"
                 android:textSize="20dp"
@@ -43,6 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#c0c0c0"
                 android:src="@drawable/ic_baseline_share_24"
                 android:id="@+id/share"
                 app:tint="@android:color/white"></ImageView>
@@ -50,6 +52,7 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="#c0c0c0"
                 android:layout_weight="1"
                 android:src="@drawable/ic_baseline_favorite_border_24"
                 android:id="@+id/fav"

@@ -39,12 +39,18 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         this.txt_cart_name = txt_cart_name;
     }
 
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
     public CartViewHolder(@NonNull View itemView) {
         super(itemView);
         txt_cart_name= itemView.findViewById(R.id.cart_item_name);
         txt_cart_price = itemView.findViewById(R.id.cart_item_price);
         btn_quatity = itemView.findViewById(R.id.btn_quatity);
         img_cart = itemView.findViewById(R.id.img_Cart);
+        img_cart.setOnClickListener(this);
+
     }
 
     @Override
@@ -56,6 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
 
     private List<Order> listData = new ArrayList<>();
     private Cart cart;
+    Database database;
 
     public CartAdapter(List<Order> listData, Cart cart) {
         this.listData = listData;
@@ -75,7 +82,22 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
 
 
+        holder.img_cart.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   new Database(cart).removeFoodCart(listData.get(position).getProductId());
+                                                   removeItem(position);
+                                                   notifyItemRemoved(position);
+                                                   int total = 0;
+                                                   List<Order> orders = new Database(cart).getCarts();
+                                                   for(Order item :orders)
+                                                       total += (Integer.parseInt(item.getPrice())) * (Integer.parseInt(item.getQuantity()));
 
+                                                   Locale locale = new Locale("en","US");
+                                                   NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+                                                   cart.txtTotalPrice.setText(fmt.format(total));
+                                               }
+                                           });
         holder.btn_quatity.setNumber(listData.get(position).getQuantity());
         holder.btn_quatity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
             @Override
@@ -108,5 +130,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     @Override
     public int getItemCount() {
         return listData.size();
+    }
+    public void removeItem(int position){
+        listData.remove(position);
+        notifyItemRemoved(position);
     }
 }

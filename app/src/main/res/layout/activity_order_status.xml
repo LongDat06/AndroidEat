@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".OrderStatus">
 
 
@@ -11,5 +12,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listOrder"
-        android:background="@color/teal_700"></androidx.recyclerview.widget.RecyclerView>
+        android:background="#fff8dc"></androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

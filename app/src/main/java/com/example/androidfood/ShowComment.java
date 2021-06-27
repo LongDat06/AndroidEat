@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -97,6 +98,9 @@ public class ShowComment extends AppCompatActivity {
                     };
                     loadComment(foodId);
                 }
+                else{
+                    Toast.makeText(ShowComment.this, "Not comment, Let us know what you think about the dish",Toast.LENGTH_LONG).show();
+                }
             }
         });
         mSwipeRefreshLayout.post(new Runnable() {
@@ -130,6 +134,9 @@ public class ShowComment extends AppCompatActivity {
                         }
                     };
                     loadComment(foodId);
+                }
+                else{
+                    Toast.makeText(ShowComment.this, "Not comment, Let us know what you think about the dish",Toast.LENGTH_LONG).show();
                 }
 
             }

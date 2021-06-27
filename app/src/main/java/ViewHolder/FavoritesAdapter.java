@@ -35,7 +35,7 @@ import Model.Order;
 class FavoritesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView food_name;
-    public ImageView food_img;
+    public ImageView food_img,fav;
     private ItemClickListener itemClickListener;
 
 
@@ -56,7 +56,8 @@ class FavoritesViewHolder extends RecyclerView.ViewHolder implements View.OnClic
 
         food_name = (TextView)itemView.findViewById(R.id.food_namefav);
         food_img = (ImageView)itemView.findViewById(R.id.food_imgfav);
-
+        fav = itemView.findViewById(R.id.fav);
+        fav.setOnClickListener(this);
         itemView.setOnClickListener(this);
     }
 
@@ -103,7 +104,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesViewHolder>{
             }
         });
 
-
+        holder.fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Database(favoritesActivity).removeFromFavorites(favoritesList.get(position).getFoodId(),favoritesList.get(position).getUserPhone());
+                removeItem(position);
+                notifyItemRemoved(position);
+            }
+        });
     }
 
     public void removeItem(int position){

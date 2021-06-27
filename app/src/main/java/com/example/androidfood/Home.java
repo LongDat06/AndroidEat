@@ -1,6 +1,9 @@
 package com.example.androidfood;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +35,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +55,23 @@ public class Home extends AppCompatActivity  {
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager manager;
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
-    Button btndonhang;
+//    Target target = new Target() {
+//        @Override
+//        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//            drawer.setBackground(new BitmapDrawable(getResources(), bitmap));
+//
+//        }
+//
+//        @Override
+//        public void onBitmapFailed(Drawable errorDrawable) {
+//
+//        }
+//
+//        @Override
+//        public void onPrepareLoad(Drawable placeHolderDrawable) {
+//
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,15 +139,21 @@ public class Home extends AppCompatActivity  {
 
         recycler_menu = (RecyclerView) findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
-        manager = new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(manager);
+//        manager = new LinearLayoutManager(this);
+//        recycler_menu.setLayoutManager(manager);
+        recycler_menu.setLayoutManager(new GridLayoutManager(this,2));
+
+
         loadMenu();
 
 //        Intent service = new Intent(Home.this, ListenOrder.class);
 //        startActivity(service);
 
 
-
+//        Picasso picasso = Picasso.with(this);
+//        picasso.load(
+//                R.drawable.my_bg
+//        ).into(target);
     }
 
     private void loadMenu(){
@@ -139,7 +166,7 @@ public class Home extends AppCompatActivity  {
             @Override
             protected void onBindViewHolder(@NonNull MenuViewHolder menuViewHolder, int i, @NonNull Category category) {
                 menuViewHolder.txtMenuView.setText(category.getName());
-                Picasso.with(getBaseContext()).load(category.getImage()).resize(410,200)
+                Picasso.with(getBaseContext()).load(category.getImage()).resize(410,400)
                         .into(menuViewHolder.imageView);
                 Category clickitem = category;
                 menuViewHolder.setItemClickListener(new ItemClickListener() {

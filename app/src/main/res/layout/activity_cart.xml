@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="#fff8dc"
     tools:context=".Cart">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -21,7 +21,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#deb887">
 
             <LinearLayout
                 android:layout_width="wrap_content"

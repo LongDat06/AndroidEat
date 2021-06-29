@@ -12,4 +12,5 @@ public class Commen {
     }
     public static Request currentRequest;
     public static final String INTENT_FOOD_ID ="FoodId";
+    public static Food currentRecomend;
 }

@@ -20,6 +20,7 @@ import com.example.androidfood.FavoritesActivity;
 import com.example.androidfood.FoodDetail;
 import com.example.androidfood.FoodList;
 import com.example.androidfood.R;
+import com.example.androidfood.RecomendFood;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -35,12 +36,13 @@ import Interface.ItemClickListener;
 import Model.Commen;
 import Model.DishViewed;
 import Model.Favorites;
+import Model.Food;
 import Model.Order;
 
 class DishViewedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView food_name;
-    public ImageView food_img;
+    public ImageView food_img,show_recomend;
     private ItemClickListener itemClickListener;
 
 
@@ -61,8 +63,9 @@ class DishViewedViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
         food_name = (TextView)itemView.findViewById(R.id.food_name);
         food_img = (ImageView)itemView.findViewById(R.id.food_img);
-
+        show_recomend = itemView.findViewById(R.id.show_recomend);
         itemView.setOnClickListener(this);
+        show_recomend.setOnClickListener(this);
     }
 
 
@@ -94,6 +97,8 @@ public class DishViewedAdapter extends RecyclerView.Adapter<DishViewedViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull DishViewedViewHolder holder, int position) {
+
+
         holder.food_name.setText(dishVieweds.get(position).getFoodName());
         Picasso.with(dishViewedActivity.getBaseContext()).load(dishVieweds.get(position).getFoodImg()).resize(410,200).centerCrop().into(holder.food_img);
 
@@ -106,6 +111,20 @@ public class DishViewedAdapter extends RecyclerView.Adapter<DishViewedViewHolder
                 fooddetail.putExtra("foodId",dishVieweds.get(position).getFoodId());
                 dishViewedActivity.startActivity(fooddetail);
 
+            }
+        });
+
+        holder.show_recomend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Food food = new Food();
+                Intent showrecomend= new Intent(dishViewedActivity, RecomendFood.class);
+                Commen.currentRecomend = food;
+                showrecomend.putExtra("menuId",dishVieweds.get(position).getFoodMenu());
+                showrecomend.putExtra("name",dishVieweds.get(position).getFoodName());
+                showrecomend.putExtra("img",dishVieweds.get(position).getFoodImg());
+                showrecomend.putExtra("phone",dishVieweds.get(position).getUserPhone());
+                dishViewedActivity.startActivity(showrecomend);
             }
         });
 

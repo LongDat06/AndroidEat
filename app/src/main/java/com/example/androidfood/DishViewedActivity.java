@@ -78,7 +78,6 @@ public class DishViewedActivity extends AppCompatActivity {
         dishVieweds = new Database(this).getDishViewed(Commen.currentUser.getPhone());
         adapter = new DishViewedAdapter(dishVieweds,this);
         recyclerView.setAdapter(adapter);
-        mSwipeRefreshLayout.setRefreshing(false);
         List<DishViewed> list = new Database(this).getDishViewed(Commen.currentUser.getPhone());
         if(list.size() > 0) {
             for (DishViewed dishViewed : list) {
@@ -86,10 +85,11 @@ public class DishViewedActivity extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
                 String A = dishViewed.getTime();
 //            Integer B =Integer.valueOf(date) - Integer.valueOf(A)  ;
-                if (Integer.valueOf(date) - Integer.valueOf(A) > 0) {
+                if (Integer.valueOf(date) - Integer.valueOf(A) > 5) {
                     database.removeDishViewed(dishViewed.getFoodId(), dishViewed.getUserPhone());
                 }
             }
         }
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 }

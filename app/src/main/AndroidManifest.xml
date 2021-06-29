@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".DishViewedActivity"></activity>
+        <activity android:name=".RecomendFood"></activity>
+        <activity android:name=".DishViewedActivity" />
         <activity android:name=".VerifiOTPActivity" />
 
         <meta-data

@@ -58,7 +58,9 @@ public class Home extends AppCompatActivity  {
 //    Target target = new Target() {
 //        @Override
 //        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//            drawer.setBackground(new BitmapDrawable(getResources(), bitmap));
+//            drawer.setBackground(n
+//
+//            ew BitmapDrawable(getResources(), bitmap));
 //
 //        }
 //
@@ -151,8 +153,8 @@ public class Home extends AppCompatActivity  {
 
         loadMenu();
 
-//        Intent service = new Intent(Home.this, ListenOrder.class);
-//        startActivity(service);
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
 
 
 //        Picasso picasso = Picasso.with(this);

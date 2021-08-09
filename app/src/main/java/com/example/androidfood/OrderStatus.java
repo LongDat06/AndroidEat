@@ -43,10 +43,10 @@ public class OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-//        if(getIntent() == null)
+        if(getIntent().getExtras() == null)
             loadOrder(Commen.currentUser.getPhone());
-//        else
-//            loadOrder(getIntent().getStringExtra("userPhone"));
+        else
+            loadOrder(getIntent().getStringExtra("userPhone"));
     }
 
     private void loadOrder(String phone) {
